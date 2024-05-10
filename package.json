@@ -1,0 +1,17 @@
+{
+  "name": "walk_smarter_node_server",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">\r   <a href=\"http://nhlstenden.com\" target=\"_blank\"><img src=\"https://github.com/NHL-P4-INF1C/WalkSmarter/assets/78373894/fd3b71c3-9082-42b7-b5f4-c6fbb4e3433c\" alt=\"NhlStenden\" width=\"150\"></a>\r   <a href=\"http://nhlstenden.com\" target=\"_blank\"><img src=\"https://github.com/NHL-P4-INF1C/WalkSmarter/assets/78373894/0ab4bfc0-ea08-4e8a-b64b-d7b00fb420fe\" alt=\"CodeCrusaders\" width=\"150\"></a>\r </h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2"
+  }
+}
