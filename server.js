@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -11,9 +10,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const DEV_ENV = process.env.DEV_ENV === "DEVELOPMENT";
+const DATABASE_PUBLIC_HASH = process.env.DATABASE_PUBLIC_HASH || "random_test_hash";
+
+console.log(DATABASE_PUBLIC_HASH);
 
 // Authentication Middleware
-const authenticateUser = require('./middleware/authenticateUser');
+const authenticateUser = require('./middleware/user_authentication')(DATABASE_PUBLIC_HASH);
 
 // Defined routes
 const apiRoutes = require('./routes/test_auth_requests');
@@ -29,7 +31,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(PORT, () => {
-  if (DEV_ENV) console.log("Detected development environment!");
+    if (DEV_ENV)
+    {
+        console.log("Detected development environment!");
+    }
 
-  console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

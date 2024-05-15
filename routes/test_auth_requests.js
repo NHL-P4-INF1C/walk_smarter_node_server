@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/', (req, res) => {
-    res.json({ message: 'Public route, no authentication required' });
+router.get('/test', (req, res) => {
+    res.json({ message: 'Did the authentication work?' });
 });
 
 module.exports = router;
