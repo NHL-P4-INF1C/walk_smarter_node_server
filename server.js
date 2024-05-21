@@ -15,13 +15,13 @@ const DATABASE_PUBLIC_HASH = process.env.DATABASE_PUBLIC_HASH || "random_test_ha
 console.log(DATABASE_PUBLIC_HASH);
 
 // Authentication Middleware
-const authenticateUser = require('./middleware/user_authentication')(DATABASE_PUBLIC_HASH);
+const requestAuthentication = require('./middleware/requestAuthentication');
 
 // Defined routes
 const apiRoutes = require('./routes/test_auth_requests');
 
 // Define middleware for specific route
-app.use('/api', authenticateUser);
+app.use('/api', requestAuthentication);
 
 // Mount file to route
 app.use('/api', apiRoutes);
