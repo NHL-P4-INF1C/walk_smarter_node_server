@@ -7,9 +7,9 @@ const PORT = process.env.PORT || 3000;
 const DEV_ENV = process.env.DEV_ENV === "DEVELOPMENT";
 const DATABASE_PUBLIC_HASH = process.env.DATABASE_PUBLIC_HASH || "random_test_hash";
 
-const requestAuthentication = require('./middleware/requestAuthentication')();
+const requestAuthentication = require('../middleware/requestAuthentication')();
 
-const apiRoutes = require('./routes/test_auth_requests');
+const apiRoutes = require('../routes/test_auth_requests');
 
 app.use('/api', requestAuthentication);
 
