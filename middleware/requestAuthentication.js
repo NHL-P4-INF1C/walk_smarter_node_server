@@ -1,8 +1,10 @@
 module.exports = () => {
-    return async (req, res, next) => {
+    return (req, res, next) => {
         const token = req.headers['jwt'];     
         const secretJWT = process.env.JWT;
         
+        next();
+
         if (token && token === secretJWT) {
             next();
         } else {
