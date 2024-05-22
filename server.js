@@ -3,11 +3,9 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const DEV_ENV = process.env.DEV_ENV === "DEVELOPMENT";
 const DATABASE_PUBLIC_HASH = process.env.DATABASE_PUBLIC_HASH || "random_test_hash";
-
-console.log(DATABASE_PUBLIC_HASH);
 
 const requestAuthentication = require('./middleware/requestAuthentication')();
 
