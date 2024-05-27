@@ -25,3 +25,9 @@ app.listen(PORT, () => {
 
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+// String formatting
+// const test_string = "{\"response\": \"Het Concertgebouw, located in Amsterdam, Netherlands, is one of the world's most renowned concert halls, celebrated for its exceptional acoustics and rich history. Opened in 1888, the venue is home to the Royal Concertgebouw Orchestra and hosts a wide array of performances, including classical music, jazz, and world music. The building's design, by architect Adolf Leonard van Gendt, features a neoclassical facade and an elegantly decorated interior, making it a cultural landmark in Amsterdam. With over 900 concerts annually, Het Concertgebouw attracts visitors and performers from all over the globe, contributing significantly to the city's cultural heritage.\"}"
+
+// console.log(test_string.replace('\"', '"'))

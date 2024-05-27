@@ -16,7 +16,7 @@ class OpenAIClient {
 
   async generateResponse(messages, maxTokens = 500) {
     const data = {
-      model: 'gpt-4o-2024-05-13',
+      model: 'gpt-4o',
       messages: messages,
       max_tokens: maxTokens
     };
