@@ -33,15 +33,17 @@ router.post('/test_openai', async (req, res) => {
         if(locationOfOrigin === undefined || locationOfOrigin == "")
             res.sendStatus(401)
 
+        const jsonSummaryFormat = '{ "payload": "summary here" }'
+
         const summaryGeneration = [
             { role: 'system', content: 'You are a historian, heritage expert, historical site specialist and cultural heritage expert.' },
-            { role: 'user', content: `Hello, Please provide me with a small summary of some usefull knowledge about ${pointOfInterest} that is located in ${locationOfOrigin}. Format your response as a json string, So only make 1 parameter for the response NO MORE! Name the parameter 'payload', NOTHING ELSE! Give me a plain json string no formatting so no backslash N.` }
+            { role: 'user', content: `Hello, Please provide me with a small summary of some usefull knowledge about ${pointOfInterest} that is located in ${locationOfOrigin}. Format your response as a json string, So only make 1 parameter for the response NO MORE! Give me a plain json string no formatting. Format your awnser like this: ` + jsonSummaryFormat}
         ];
 
         await client.generateResponse(summaryGeneration)
         .then(response => {
         formatted_json = JSON.parse(response['choices'][0]['message']['content']);
-        console.log(response['choices'][0]['message']);
+        console.log(response['choices'][0]['message']['content']);
         })
         .catch(error => {   
         console.error('Error:', error);
@@ -52,12 +54,12 @@ router.post('/test_openai', async (req, res) => {
 
         const questionGeneration = [
             { role: 'system', content: 'You are a teacher making an exam question.' },
-            { role: 'user', content: 'Give me a question with 1 correct and 2 incorrect answers based on this text: ' + formatted_json['response'] + ' Format your response as a json string, So only make 1 parameter for the response NO MORE! Format the questions like this: ' + jsonQuestionFormat }
+            { role: 'user', content: 'Give me a question with 1 correct and 2 incorrect answers based on this text: ' + formatted_json['payload'] + ' Format your response as a json string, So only make 1 parameter for the response NO MORE! Give me a plain json string no formatting. Format the questions like this: ' + jsonQuestionFormat }
         ];
 
         await client.generateResponse(questionGeneration)
-        .then(response => {
-        console.log(response['choices'][0]['message']['content']);     
+        .then(response => {  
+        console.log(response['choices'][0]['message']['content']);   
         res.sendStatus(200); 
         })
         .catch(error => {   
