@@ -23,8 +23,7 @@ router.post('/test_openai', async (req, res) => {
         const pointOfInterest = payload["pointOfInterest"];
         const locationOfOrigin = payload["locationOfOrigin"];
 
-        let description_formatted_json;
-        
+        let description_formatted_json, question_formatted_json;
 
         if (payload === undefined || payload == "")
             res.sendStatus(401);
@@ -33,7 +32,7 @@ router.post('/test_openai', async (req, res) => {
         if(locationOfOrigin === undefined || locationOfOrigin == "")
             res.sendStatus(401)
 
-        const jsonSummaryFormat = '{ "payload": "summary here" }'
+        const jsonSummaryFormat = '{ "description": "summary here" }'
 
         const summaryGeneration = [
             { role: 'system', content: 'You are a historian, heritage expert, historical site specialist and cultural heritage expert.' },
@@ -54,12 +53,15 @@ router.post('/test_openai', async (req, res) => {
 
         const questionGeneration = [
             { role: 'system', content: 'You are a teacher making an exam question.' },
-            { role: 'user', content: 'Give me a question with 1 correct and 2 incorrect answers based on this text: ' + description_formatted_json['payload'] + ' Format your response as a json string, So only make 1 parameter for the response NO MORE! Give me a plain json string no formatting. Format the questions like this: ' + jsonQuestionFormat }
+            { role: 'user', content: 'Give me a question with 1 correct and 2 incorrect answers based on this text: ' + description_formatted_json['description'] + ' Format your response as a json string, So only make 1 parameter for the response NO MORE! Give me a plain json string no formatting. Format the questions like this: ' + jsonQuestionFormat }
         ];
 
         await client.generateResponse(questionGeneration)
         .then(response => {  
+        question_formatted_json = JSON.parse(response['choices'][0]['message']['content']);
+        question_formatted_json['description'] = description_formatted_json['description'];
 
+        console.log(question_formatted_json);
         console.log(response['choices'][0]['message']['content']);   
         res.sendStatus(200); 
         })
