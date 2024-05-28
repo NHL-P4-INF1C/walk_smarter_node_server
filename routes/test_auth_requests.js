@@ -42,7 +42,6 @@ router.post('/test_openai', async (req, res) => {
         await client.generateResponse(summaryGeneration)
         .then(response => {
         description_formatted_json = JSON.parse(response['choices'][0]['message']['content']);
-        console.log(response['choices'][0]['message']['content']);
         })
         .catch(error => {   
         console.error('Error:', error);
@@ -60,9 +59,6 @@ router.post('/test_openai', async (req, res) => {
         .then(response => {  
         question_formatted_json = JSON.parse(response['choices'][0]['message']['content']);
         question_formatted_json['description'] = description_formatted_json['description'];
-
-        console.log(question_formatted_json);
-        console.log(response['choices'][0]['message']['content']);   
         res.sendStatus(200); 
         })
         .catch(error => {   
