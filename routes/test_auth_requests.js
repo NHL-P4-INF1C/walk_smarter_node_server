@@ -41,11 +41,11 @@ router.post('/test_openai', async (req, res) => {
 
         await client.generateResponse(summaryGeneration)
         .then(response => {
-        description_formatted_json = JSON.parse(response['choices'][0]['message']['content']);
+            description_formatted_json = JSON.parse(response['choices'][0]['message']['content']);
         })
         .catch(error => {   
-        console.error('Error:', error);
-        res.sendStatus(418);
+            console.error('Error:', error);
+            res.sendStatus(418);
         });
 
         const jsonQuestionFormat = '{ "correct_answer": "correct answer here", "description": "description here", "question": "question here", "wrong_answer": [ "wrong answer here", "wrong answer here" ] }'
@@ -57,14 +57,13 @@ router.post('/test_openai', async (req, res) => {
 
         await client.generateResponse(questionGeneration)
         .then(response => {  
-        question_formatted_json = JSON.parse(response['choices'][0]['message']['content']);
-        question_formatted_json['description'] = description_formatted_json['description'];
-        res.send(JSON.stringify(question_formatted_json));
-        res.sendStatus(200); 
+            question_formatted_json = JSON.parse(response['choices'][0]['message']['content']);
+            question_formatted_json['description'] = description_formatted_json['description'];
+            res.send(JSON.stringify(question_formatted_json));
         })
         .catch(error => {   
-        console.error('Error:', error);
-        res.sendStatus(418);
+            console.error('Error:', error);
+            res.sendStatus(418);
         });  
 
     } catch (error) {
