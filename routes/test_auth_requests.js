@@ -59,6 +59,7 @@ router.post('/test_openai', async (req, res) => {
         .then(response => {  
         question_formatted_json = JSON.parse(response['choices'][0]['message']['content']);
         question_formatted_json['description'] = description_formatted_json['description'];
+        res.send(JSON.stringify(question_formatted_json));
         res.sendStatus(200); 
         })
         .catch(error => {   
