@@ -22,8 +22,6 @@ try {
 
     const record = await pocketbaseClient.getClient().collection('api').create(data);
 
-    console.log(record);
-
     const requestAuthentication = require('../middleware/requestAuthentication')(record['hash']);
 
     const apiRoutes = require('../routes/test_auth_requests');

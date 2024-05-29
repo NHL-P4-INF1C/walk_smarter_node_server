@@ -52,7 +52,7 @@ router.post('/test_openai', async (req, res) => {
 
         const questionGeneration = [
             { role: 'system', content: 'You are a teacher making an exam question.' },
-            { role: 'user', content: 'Give me a question with 1 correct and 2 incorrect answers based on this text: ' + description_formatted_json['description'] + ' Format your response as a json string, So only make 1 parameter for the response NO MORE! Give me a plain json string no formatting. Format the questions like this: ' + jsonQuestionFormat }
+            { role: 'user', content: 'Give me a question with 1 correct and 2 incorrect answers based on this text: ' + description_formatted_json['description'] + ' The question must not be about the location. Format your response as a json string, So only make 1 parameter for the response NO MORE! Give me a plain json string no formatting. Format the questions like this: ' + jsonQuestionFormat }
         ];
 
         await client.generateResponse(questionGeneration)
