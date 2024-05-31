@@ -24,7 +24,7 @@ try {
 
     const requestAuthentication = require('../middleware/requestAuthentication')(record['hash']);
 
-    const apiRoutes = require('../routes/test_auth_requests');
+    const apiRoutes = require('../routes/openai');
 
     app.use('/api', requestAuthentication);
 

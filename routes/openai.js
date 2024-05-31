@@ -7,17 +7,7 @@ const bodyParser = require("body-parser");
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.post('/test', async (req, res) => {
-    try {
-        const records = await pocketbaseClient.getClient().collection('users').getList();
-        res.status(200).json(records);
-    } catch (error) {
-        console.error('Error in POST /test:', error);
-        res.status(500).json({ error: 'Error' });
-    }
-});
-
-router.post('/test_openai', async (req, res) => {
+router.post('/openai', async (req, res) => {
     try {
         const payload = req.body.payload;
         const pointOfInterest = payload["pointOfInterest"];
