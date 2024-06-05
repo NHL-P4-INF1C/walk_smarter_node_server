@@ -9,9 +9,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const DEV_ENV = process.env.DEV_ENV === "DEVELOPMENT";
 
-async function main() {
-  if (!DEV_ENV) {
-    try {
+async function main()
+{
+  if (!DEV_ENV)
+  {
+    try
+    {
       await pocketbaseClient.loginAsAdmin();
 
       const oldHash = await pocketbaseClient
@@ -36,10 +39,14 @@ async function main() {
       app.use("/api", requestAuthentication);
 
       await pocketbaseClient.logoutAdmin();
-    } catch (error) {
+    }
+    catch (error)
+    {
       console.log(error);
     }
-  } else {
+  }
+  else
+  {
     const requestAuthentication =
       require("../middleware/requestAuthentication")("dev-hash");
     app.use("/api", requestAuthentication);
@@ -52,8 +59,10 @@ async function main() {
 
   app.use("/api", apiRoutes);
 
-  app.listen(PORT, () => {
-    if (DEV_ENV) {
+  app.listen(PORT, () =>
+  {
+    if (DEV_ENV)
+    {
       console.log("Detected development environment!");
     }
     console.log(`Server is running on http://localhost:${PORT}`);
