@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
 const { createHash } = require("crypto");
 
 const pocketbaseClient = require("../pocketbase/pocketbaseClient");
@@ -22,7 +21,7 @@ async function main() {
 
       const data = {
         hash: createHash("sha256")
-          .update(oldHash["items"][0]["hash"] + oldHash["items"][0]["id"])
+          .update(`${oldHash.items[0].hash}${oldHash.items[0].id}`)
           .digest("hex"),
       };
 
@@ -32,7 +31,7 @@ async function main() {
         .create(data);
 
       const requestAuthentication =
-        require("../middleware/requestAuthentication")(record["hash"]);
+        require("../middleware/requestAuthentication")(record.hash);
 
       app.use("/api", requestAuthentication);
 
@@ -57,7 +56,6 @@ async function main() {
     if (DEV_ENV) {
       console.log("Detected development environment!");
     }
-
     console.log(`Server is running on http://localhost:${PORT}`);
   });
 }
