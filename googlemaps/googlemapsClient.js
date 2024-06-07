@@ -37,16 +37,17 @@ class googlemapsClient {
                 const lat2 = location['lat'];
 
                 if(calculateDistanceInMeters(lng, lat, lng2, lat2) > sensitivity)
-                    {
-
-                    }
+                {
+                    print('Element looks like it fits distance:');
+                    print(element);
+                }
             });
-            var requestBuilder = this.apiPicUrl + 'photoreference='
-            const response = await axios.get(requestBuilder);
-            print(response);
-            return response;
+            // var requestBuilder = this.apiPicUrl + 'photoreference='
+            // const response = await axios.get(requestBuilder);
+            // print(response);
+            // return response;
         } catch (error) {
-            print(error);
+            console.error(error);
         }
     }
 
@@ -68,3 +69,8 @@ class googlemapsClient {
 
 
 }
+
+const instance = new googlemapsClient(process.env.GOOGLEMAPSTOKEN);
+Object.freeze(instance);
+
+module.exports = instance;
