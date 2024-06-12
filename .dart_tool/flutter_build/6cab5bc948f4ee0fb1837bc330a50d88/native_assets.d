@@ -1,0 +1,1 @@
+ /home/sufficient/FLUTTER/walk_smarter/.dart_tool/flutter_build/6cab5bc948f4ee0fb1837bc330a50d88/native_assets.yaml: 
